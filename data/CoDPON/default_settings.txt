@@ -4,35 +4,35 @@
 
 ## Scenario settings
 #-----Identification----------------------------
-# Um nome para identificar o presente cenário
+# A name to identify this scenario
 Scenario.name = marajo_archipelago
-# Se é para criar conexão entre os nós
+# If it is to create connections between nodes
 Scenario.simulateConnections = true
-# Frequência com a qual se obterá uma amostragem da simulação
+# Frequency with which they will get a sampling of the simulation
 Scenario.updateInterval = 0.1
 
 #-----Simulation Time --------------------------
-# Tempo em que a simulação irá rodar em segundos
+# Time the simulation will run in seconds
 # 43200s == 12h
 Scenario.endTime = 43000
-# Interface wireless para todos os nós
+# Wireless interface for all nodes
 # firstinterface.type = SimpleBroadcastInterface
 highspeedInterface.type = SimpleBroadcastInterface
 
 #----Velocity------------------------------------
 # For 6Mbps. One byte is 8 bits, therefore 250k bytes is 2M bits. It's common practice to use B=byte and b=bit. Transmit speed is in bytes so you want 750k, not 6M.
-# Velocidade de Transmissão para 2 Mbps = 250kBps
-# Velocidade de Transmissão para 11 Mbps = 1375kBps
+# Transmission speed for 2 Mbps = 250kBps
+# Transmission speed for 11 Mbps = 1375kBps
 highspeedInterface.transmitSpeed = 10M
-# In this case we will use an antenna with amplifier - Area de cobertura em metros
+# In this case we will use an antenna with amplifier - Coverage area in meters
 highspeedInterface.transmitRange = 100
 
-# Número de grupos. São  6 no total
-# 10 representam PBS e 6 representam os barcos
+# Number of groups. Are 6 in total
+# 10 represents PBS and 6 represent the boats
 Scenario.nrofHostGroups = 22
 
-#----- Configurações Gerais válidas para todos do grupo
-# Modelo de movimento para todos os nós
+#----- General settings apply to all group
+# Motion model to all nodes
 Group.movementModel = MapRouteMovement
 Group.router = EpidemicRouter
 Group.routeType = 1
@@ -45,7 +45,7 @@ Group.nrofHosts = 1
 # Message TTL of 300 minutes (5 hours)
 # Group.msgTtl = 300
 
-# representa o nũmero de PBS por grupo
+# represents the number of PBS per group
 
 # Group.nrofApplications = 0
 
@@ -53,47 +53,47 @@ Group.nrofHosts = 1
 
 # ------ Displacement Plans (Boats)----------------------------------
 
-# group1 (Rota Belem->Curralinho) specific settings
+# group1 (route Belem->Curralinho) specific settings
 Group1.groupID = Boat1_
 Group1.routeFile = data/CoDPON/RT_BLM_CUR.wkt
 
-# group2 (Rota Belem->Muana) specific settings
+# group2 (route Belem->Muana) specific settings
 Group2.groupID = Boat2_
 Group2.routeFile = data/CoDPON/RT_BLM_MNA.wkt
 
-# group3 (Rota Belem->Ponta de Pedras) specific settings
+# group3 (route Belem->Ponta de Pedras) specific settings
 Group3.groupID = Boat3_
 Group3.routeFile = data/CoDPON/RT_BLM_PPD.wkt
 
-# group4 (Rota Belem->Soure) specific settings
+# group4 (route Belem->Soure) specific settings
 Group4.groupID = Boat4_
 Group4.routeFile = data/CoDPON/RT_BLM_SRE.wkt
 
-# group5 (Rota Belem->São Sebastião) specific settings
+# group5 (route Belem->São Sebastião) specific settings
 Group5.groupID = Boat5_
 Group5.routeFile = data/CoDPON/RT_BLM_SST.wkt
 
-# group6 (Rota Breves->Melgaço) specific settings
+# group6 (route Breves->Melgaço) specific settings
 Group6.groupID = Boat6_
 Group6.routeFile = data/CoDPON/RT_BRV_MGC.wkt
 
-# group7 (Rota Curralinho->Breves) specific settings
+# group7 (route Curralinho->Breves) specific settings
 Group7.groupID = Boat7_
 Group7.routeFile = data/CoDPON/RT_CUR_BRV.wkt
 
-# group8 (Rota Melgaço->Portel) specific settings
+# group8 (route Melgaço->Portel) specific settings
 Group8.groupID = Boat8_
 Group8.routeFile = data/CoDPON/RT_MGC_PRT.wkt
 
-# group9 (Rota Muana->Vilarejos Ribeirinhos) specific settings
+# group9 (route Muana->Vilarejos Ribeirinhos) specific settings
 Group9.groupID = Boat9_
 Group9.routeFile = data/CoDPON/RT_MNA_RIV.wkt
 
-# group10 (Rota Ponta de Pedras->Vilarejos Ribeirinhos) specific settings
+# group10 (route Ponta de Pedras->Vilarejos Ribeirinhos) specific settings
 Group10.groupID = Boat10_
 Group10.routeFile = data/CoDPON/RT_PPD_RIV.wkt
 
-# group11 (Rota Portel->Vilarejos Ribeirinhos) specific settings
+# group11 (route Portel->Vilarejos Ribeirinhos) specific settings
 Group11.groupID = Boat11_
 Group11.routeFile = data/CoDPON/RT_PRT_RIV.wkt
 
@@ -126,7 +126,7 @@ Group16.groupID = PBS_Curralinho
 Group16.nrofHosts = 1
 Group16.movementModel = StationaryMovement
 # POINT (4278.383417733461 827.1328608391995)
-# O valor do Y foi obtido a partir de 10000 (valor do Y no originboat) - 827 que é o valor do Y aqui
+# the value of Y was obtained from 10000 ( originboat the value Y ) - 827 the value of which is herein Y
 Group16.nodeLocation = 4278, 9173
 
 Group17.groupID = PBS_MGC
@@ -195,9 +195,9 @@ Events1.class = MessageEventGenerator
 # Creation interval in seconds (one new message every 25 to 35 seconds)
 Events1.interval = 25,240
 # Message sizes (50kB - 150kB)
-Events1.size = 500k,1000k
+Events1.size = 75
 # range of message source/destination addresses
-# Existem 8 PBS, por isso o 8
+# There PBS 8 , so the 8
 Events1.hosts = 13, 15
 # Message ID prefix
 Events1.prefix = M

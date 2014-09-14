@@ -27,6 +27,9 @@ public class ActivenessHandler {
 	private Queue<TimeRange> activeTimes;
 	private TimeRange curRange = null;
 	
+	// RACHIT:
+	private TimeRange breakdownTime = null;
+	
 	public ActivenessHandler(Settings s) {
 		this.activeTimes = parseActiveTimes(s);
 
@@ -68,12 +71,25 @@ public class ActivenessHandler {
 		
 		return timesList;
 	}
+	/**
+	 * RACHIT
+	 */
+	public void setBreakdownTime(int durationInHours) {
+		double start = SimClock.getTime();
+		double end = start + durationInHours*60*60;
+		this.breakdownTime = new TimeRange(start, end);
+	}
 	
 	/**
 	 * Returns true if node should be active at the moment
 	 * @return true if node should be active at the moment
 	 */
 	public boolean isActive() {
+		//RACHIT
+		if(this.breakdownTime != null) {
+			return this.breakdownTime.isInRange(SimClock.getTime());
+		}
+		
 		if (this.activeTimes == null) {
 			return true; // no inactive times 
 		}

@@ -58,10 +58,24 @@ public class SimpleBroadcastInterface extends NetworkInterface {
 			if (conSpeed > this.transmitSpeed) {
 				conSpeed = this.transmitSpeed; 
 			}
-
-			Connection con = new CBRConnection(this.host, this, 
-					anotherInterface.getHost(), anotherInterface, conSpeed);
-			connect(con,anotherInterface);
+			
+			// RACHIT :
+			boolean active = true;
+			if(anotherInterface.getHost().getName().startsWith("PBS") && !this.host.getName().startsWith("PBS")) {
+				this.host.setBreakdownState();
+				active = this.host.isActive();
+			}
+			else if(!anotherInterface.getHost().getName().startsWith("PBS") && this.host.getName().startsWith("PBS")) {
+				anotherInterface.getHost().setBreakdownState();
+				active = anotherInterface.getHost().isActive();
+			}
+			
+			//if(active) {
+				Connection con = new CBRConnection(this.host, this, 
+						anotherInterface.getHost(), anotherInterface, conSpeed);
+				connect(con,anotherInterface);
+			//}
+			
 			
 			//Write New Connection in file here
 			/*

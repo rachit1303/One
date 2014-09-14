@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import movement.ActivenessHandler;
+import movement.HostBreakdown;
 import movement.MovementModel;
 import movement.Path;
 import routing.MessageRouter;
@@ -33,6 +35,9 @@ public class DTNHost implements Comparable<DTNHost> {
 	private List<MovementListener> movListeners;
 	private List<NetworkInterface> net;
 	private ModuleCommunicationBus comBus;
+	
+	// RACHIT : variable to determine if host is in broken state
+	private HostBreakdown state;
 
 	static {
 		DTNSim.registerForReset(DTNHost.class.getCanonicalName());
@@ -86,6 +91,9 @@ public class DTNHost implements Comparable<DTNHost> {
 				l.initialLocation(this, this.location);
 			}
 		}
+		
+		// RACHIT: Setting the default value to null
+		this.state = null;
 	}
 	
 	/**
@@ -109,7 +117,13 @@ public class DTNHost implements Comparable<DTNHost> {
 	 * @return true if this node is active (false if not)
 	 */
 	public boolean isActive() {
-		return this.movement.isActive();
+		// RACHIT
+		if(this.state != null && this.state.isBroken()) {
+			return false;
+		}
+		else {
+			return this.movement.isActive();
+		}
 	}
 
 	/**
@@ -503,6 +517,17 @@ public class DTNHost implements Comparable<DTNHost> {
 	 */
 	public int compareTo(DTNHost h) {
 		return this.getAddress() - h.getAddress();
+	}
+	
+	// RACHIT:
+	public boolean setBreakdownState() {
+		if(this.state == null) {
+			this.state = new HostBreakdown();
+		}
+		else {
+			this.state.setBreakdownState();
+		}
+		return this.state.isBroken();
 	}
 
 }

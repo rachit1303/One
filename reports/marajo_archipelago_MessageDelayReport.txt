@@ -1,2 +1,0 @@
-Message Name	Delay Time(s)	# of Forwards 
-# no messages delivered in sim time 4881.6000
