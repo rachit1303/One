@@ -71,20 +71,16 @@ public class VBRConnection extends Connection {
 
 		this.msgFromNode = from;
 		Message newMessage = m.replicate();
-		
-		List<Message> messages = new ArrayList<Message>(from.getMessageCollection());
-		
-		///Delete the original message here
-		from.deleteMessage(m.getId(), false);
-		
-		List<Message> messages_afterDelete = new ArrayList<Message>(from.getMessageCollection());
-		
+				
 		int retVal = getOtherNode(from).receiveMessage(newMessage, from);
 		
 		if (retVal == MessageRouter.RCV_OK) {
 			this.msgOnFly = newMessage;
 			this.msgsize = m.getSize();
 			this.msgsent = 0;
+			
+			///Delete the original message here
+			from.deleteMessage(m.getId(), false);
 		}
 
 		return retVal;

@@ -277,11 +277,13 @@ public abstract class ActiveRouter extends MessageRouter {
 		if (this.getHost().getName().contains("PBS"))
 			return true;
 
-		// System.out.println(this.getHost());
-		// System.out.println(this.getHost().getAddress());
-
 		int freeBuffer = this.getFreeBufferSize();
-		/* delete messages from the buffer until there's enough space */
+		if ( freeBuffer < size )
+			return false;
+		else return true;
+/*
+		int freeBuffer = this.getFreeBufferSize();
+		//delete messages from the buffer until there's enough space 
 		while (freeBuffer < size) {
 			Message m = getOldestMessage(true); // don't remove msgs being sent
 
@@ -289,7 +291,7 @@ public abstract class ActiveRouter extends MessageRouter {
 				return false; // couldn't remove any more messages
 			}
 
-			/* delete message from the buffer as "drop" */
+			// delete message from the buffer as "drop" 
 
 			// What is this buffer?
 
@@ -298,6 +300,8 @@ public abstract class ActiveRouter extends MessageRouter {
 		}
 
 		return true;
+*/
+		
 	}
 
 	/**
@@ -602,7 +606,6 @@ public abstract class ActiveRouter extends MessageRouter {
 
 				if (this.getHost().compareTo(ToNode) != 0) {
 
-					// for (int i = 0; i != temp.length; i++) {
 					if (SmallestIndex < SmallestIndex1) {
 
 						int retVal = startTransfer_2(m, con);
@@ -613,7 +616,6 @@ public abstract class ActiveRouter extends MessageRouter {
 											// trying others
 						}
 					}
-					// }
 				}
 
 				if (this.getHost().compareTo(FromNode) != 0) {

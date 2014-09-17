@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import movement.ActivenessHandler;
-import movement.HostBreakdown;
 import movement.MovementModel;
 import movement.Path;
 import routing.MessageRouter;
@@ -35,11 +33,6 @@ public class DTNHost implements Comparable<DTNHost> {
 	private List<MovementListener> movListeners;
 	private List<NetworkInterface> net;
 	private ModuleCommunicationBus comBus;
-	
-	// RACHIT : variable to determine if host is in broken state
-	// to check whether Host is connected to other host
-	private HostBreakdown state;
-	private boolean connected; 
 
 	static {
 		DTNSim.registerForReset(DTNHost.class.getCanonicalName());
@@ -93,9 +86,6 @@ public class DTNHost implements Comparable<DTNHost> {
 				l.initialLocation(this, this.location);
 			}
 		}
-		
-		// RACHIT: Setting the default value to null
-		this.state = null;
 	}
 	
 	/**
@@ -119,13 +109,7 @@ public class DTNHost implements Comparable<DTNHost> {
 	 * @return true if this node is active (false if not)
 	 */
 	public boolean isActive() {
-		// RACHIT
-		if(isConnectionBroken()) {
-			return false;
-		}
-		else {
-			return this.movement.isActive();
-		}
+		return this.movement.isActive();
 	}
 
 	/**
@@ -171,14 +155,10 @@ public class DTNHost implements Comparable<DTNHost> {
 	 */
 	public void connectionUp(Connection con) {
 		this.router.changedConnection(con);
-		if(!this.connected)
-			this.connected = true;
 	}
 
 	public void connectionDown(Connection con) {
 		this.router.changedConnection(con);
-		if(this.connected)
-			this.connected = false;
 	}
 
 	/**
@@ -524,32 +504,5 @@ public class DTNHost implements Comparable<DTNHost> {
 	public int compareTo(DTNHost h) {
 		return this.getAddress() - h.getAddress();
 	}
-	
-	// RACHIT:
-	public boolean setBreakdownState() {
-		if(this.state == null) {
-			this.state = new HostBreakdown();
-		}
-		else {
-			this.state.setBreakdownState();
-		}
-		boolean state = this.state.isBroken();
-		if(state) {
-			List<Message> messages = new ArrayList<Message>(this.getMessageCollection());
-			for(Message m : messages)
-				this.deleteMessage(m.getId(), false);
-		}
-		return state;
-	}
-	
-	public boolean isConnectionBroken() {
-		if(this.state != null && this.state.isBroken())
-			return true;
-		else 
-			return false;
-	}
-	
-	public boolean isConnected() {
-		return this.connected;
-	}
+
 }
