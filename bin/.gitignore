@@ -1,7 +1,3 @@
-/core/
-/gui/
-/input/
-/interfaces/
 /movement/
-/report/
-/routing/
+/core/
+/interfaces/

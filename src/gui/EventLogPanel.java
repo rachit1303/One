@@ -248,7 +248,6 @@ public class EventLogPanel extends JPanel
 		}
 		
       	addEvent(name, host1, host2, message, check.pauseOnEvent());	
-      	
       	/*
       	try {
 			FileWriter fw = new FileWriter("./logs.txt", true);

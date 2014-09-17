@@ -69,13 +69,11 @@ public class ActivenessHandler {
 		return timesList;
 	}
 	
-	
 	/**
 	 * Returns true if node should be active at the moment
 	 * @return true if node should be active at the moment
 	 */
 	public boolean isActive() {
-		
 		if (this.activeTimes == null) {
 			return true; // no inactive times 
 		}
