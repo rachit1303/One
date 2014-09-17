@@ -5,7 +5,7 @@ import java.util.Random;
 
 // RACHIT
 public class HostBreakdown {
-	static int[] duration = {2,4,8,16,24,32};
+	static int[] duration = {1,2,4,8,16,32};
 	private double start;
 	private double end;
 			
