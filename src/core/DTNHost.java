@@ -7,8 +7,6 @@ package core;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-
-import movement.ActivenessHandler;
 import movement.HostBreakdown;
 import movement.MovementModel;
 import movement.Path;
