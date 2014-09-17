@@ -60,23 +60,18 @@ public class SimpleBroadcastInterface extends NetworkInterface {
 			}
 			
 			// RACHIT :
-			boolean active = true;
-			if(anotherInterface.getHost().getName().startsWith("PBS") && !this.host.getName().startsWith("PBS")) {
-				this.host.setBreakdownState();
-				active = this.host.isActive();
+			if(!this.host.isConnected() && !anotherInterface.getHost().isConnected()) {
+				if(anotherInterface.getHost().getName().startsWith("PBS") && !this.host.getName().startsWith("PBS")) {
+					this.host.setBreakdownState();
+				}
+				else if(!anotherInterface.getHost().getName().startsWith("PBS") && this.host.getName().startsWith("PBS")) {
+					anotherInterface.getHost().setBreakdownState();
+				}
 			}
-			else if(!anotherInterface.getHost().getName().startsWith("PBS") && this.host.getName().startsWith("PBS")) {
-				anotherInterface.getHost().setBreakdownState();
-				active = anotherInterface.getHost().isActive();
-			}
-			
-			//if(active) {
-				Connection con = new CBRConnection(this.host, this, 
-						anotherInterface.getHost(), anotherInterface, conSpeed);
-				connect(con,anotherInterface);
-			//}
-			
-			
+			Connection con = new CBRConnection(this.host, this, 
+					anotherInterface.getHost(), anotherInterface, conSpeed);
+			connect(con,anotherInterface);
+
 			//Write New Connection in file here
 			/*
 			DTNHost To = con.ToNode();

@@ -37,7 +37,9 @@ public class DTNHost implements Comparable<DTNHost> {
 	private ModuleCommunicationBus comBus;
 	
 	// RACHIT : variable to determine if host is in broken state
+	// to check whether Host is connected to other host
 	private HostBreakdown state;
+	private boolean connected; 
 
 	static {
 		DTNSim.registerForReset(DTNHost.class.getCanonicalName());
@@ -118,7 +120,7 @@ public class DTNHost implements Comparable<DTNHost> {
 	 */
 	public boolean isActive() {
 		// RACHIT
-		if(this.state != null && this.state.isBroken()) {
+		if(isConnectionBroken()) {
 			return false;
 		}
 		else {
@@ -169,10 +171,14 @@ public class DTNHost implements Comparable<DTNHost> {
 	 */
 	public void connectionUp(Connection con) {
 		this.router.changedConnection(con);
+		if(!this.connected)
+			this.connected = true;
 	}
 
 	public void connectionDown(Connection con) {
 		this.router.changedConnection(con);
+		if(this.connected)
+			this.connected = false;
 	}
 
 	/**
@@ -527,7 +533,23 @@ public class DTNHost implements Comparable<DTNHost> {
 		else {
 			this.state.setBreakdownState();
 		}
-		return this.state.isBroken();
+		boolean state = this.state.isBroken();
+		if(state) {
+			List<Message> messages = new ArrayList<Message>(this.getMessageCollection());
+			for(Message m : messages)
+				this.deleteMessage(m.getId(), false);
+		}
+		return state;
 	}
-
+	
+	public boolean isConnectionBroken() {
+		if(this.state != null && this.state.isBroken())
+			return true;
+		else 
+			return false;
+	}
+	
+	public boolean isConnected() {
+		return this.connected;
+	}
 }
