@@ -195,8 +195,9 @@ public class World {
 
 		if (boatBrokenMode)
 			moveHosts_2(this.updateInterval, brokenBoats);
-		else
+		else 
 			moveHosts(this.updateInterval);
+			
 			
 		simClock.setTime(runUntil);
 		
@@ -257,6 +258,7 @@ public class World {
 			}
 	}
 
+	
 	/**
 	 * Moves all hosts in the world for a given amount of time
 	 * @param timeIncrement The time how long all nodes should move
@@ -264,7 +266,10 @@ public class World {
 	private void moveHosts(double timeIncrement) {
 		for (int i=0,n = hosts.size(); i<n; i++) {
 			DTNHost host = hosts.get(i);
-			host.move(timeIncrement);			
+			// RACHIT
+			if(host.getTimeToEndConnectionToPBS() <= SimClock.getTime()) {
+				host.move(timeIncrement);			
+			}
 		}		
 	}
 	

@@ -37,6 +37,8 @@ public class DTNHost implements Comparable<DTNHost> {
 	// to check whether Host is connected to other host
 	private HostBreakdown state;
 	private boolean connected; 
+	private double timeToEndConnectionToPBS;
+	
 
 
 	static {
@@ -94,6 +96,7 @@ public class DTNHost implements Comparable<DTNHost> {
 		
 		// RACHIT: Setting the default value to null
 		this.state = null;
+		this.timeToEndConnectionToPBS = -1.0;
 	}
 	
 	/**
@@ -195,6 +198,15 @@ public class DTNHost implements Comparable<DTNHost> {
 	 */
 	public Coord getLocation() {
 		return this.location;
+	}
+	
+	// Rachit
+	/**
+	 * Returns the nexr location of this host. 
+	 * @return The destination
+	 */
+	public Coord getDestination() {
+		return this.destination;
 	}
 
 	/**
@@ -544,6 +556,15 @@ public class DTNHost implements Comparable<DTNHost> {
 	
 	public boolean isConnected() {
 		return this.connected;
+	}
+	
+	public void setConnectdToPBS(double startTime) {
+		if(startTime > this.timeToEndConnectionToPBS)
+			this.timeToEndConnectionToPBS = startTime+20*60;
+	}
+
+	public double getTimeToEndConnectionToPBS() {
+		return this.timeToEndConnectionToPBS;
 	}
 
 }

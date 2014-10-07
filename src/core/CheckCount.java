@@ -1,3 +1,5 @@
+package core;
+
 import java.io.*;
 import java.util.Hashtable;
 
@@ -11,12 +13,12 @@ public class CheckCount {
 	
 	static int NumberOfMessages = 50;
 	
-	public static void main(String[] args) throws IOException {
+	public static void main_output(String args) throws IOException {
 		// TODO Auto-generated method stub
 		Hashtable<Integer, Integer> Messages = new Hashtable<Integer, Integer>();
 		
-		String FileName = "./reports/marajo_archipelago_MessageDelayReport.txt"; 
-		String FileNameWrite = "./reports/results_marajo_archipelago_MessageDelayReport.txt"; 
+		String FileName = "./"+args; 
+		String FileNameWrite = "./reports/"+args; 
 		
 		BufferedReader BR = new BufferedReader(new FileReader(FileName));
 		BufferedWriter BW = new BufferedWriter(new FileWriter(FileNameWrite));

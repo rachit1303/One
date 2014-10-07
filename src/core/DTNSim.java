@@ -5,6 +5,7 @@
 package core;
 import gui.DTNSimGUI;
 
+import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
@@ -94,6 +95,13 @@ public class DTNSim {
 			Settings.setRunIndex(guiIndex);
 						
 			new DTNSimGUI().start();
+		}
+		
+		try {
+			CheckCount.main_output(report.Report.outFileName);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 	

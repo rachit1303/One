@@ -8,8 +8,11 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -65,7 +68,7 @@ public abstract class Report {
 	private int lastOutputSuffix;
 	private double outputInterval;
 	private double lastReportTime;
-	private String outFileName;
+	public static String outFileName;
 	private String scenarioName;
 	
 	/**
@@ -119,8 +122,11 @@ public abstract class Report {
 			if (!outDir.endsWith("/")) {
 				outDir += "/";	// make sure dir ends with directory delimiter
 			}
-			outFileName = outDir + scenarioName + 
-				"_" + this.getClass().getSimpleName();
+			DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+			Date date = new Date();
+			//outFileName = outDir + scenarioName + 
+			//	"_" + this.getClass().getSimpleName();
+			outFileName = outDir + dateFormat.format(date).toString();
 			if (outputInterval == -1) {
 				outFileName += OUT_SUFFIX; // no intervalled reports
 			}
@@ -182,6 +188,7 @@ public abstract class Report {
 			createSuffixedOutput(outFileName);
 		}
 		else {
+			
 			createOutput(outFileName);
 		}
 	}

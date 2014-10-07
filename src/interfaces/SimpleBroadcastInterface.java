@@ -57,9 +57,11 @@ public class SimpleBroadcastInterface extends NetworkInterface {
 			// RACHIT :
 			if(!this.host.isConnected() && !anotherInterface.getHost().isConnected()) {
 				if(anotherInterface.getHost().getName().startsWith("PBS") && !this.host.getName().startsWith("PBS")) {
+					this.host.setConnectdToPBS(SimClock.getTime());
 					this.host.setBreakdownState();
 				}
 				else if(!anotherInterface.getHost().getName().startsWith("PBS") && this.host.getName().startsWith("PBS")) {
+					anotherInterface.getHost().setConnectdToPBS(SimClock.getTime());
 					anotherInterface.getHost().setBreakdownState();
 				}
 			}

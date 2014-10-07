@@ -11,7 +11,7 @@
 
 ## Scenario settings
 #-----Identification----------------------------
-# Um nome para identificar o presente cenário
+# A name to identify this scenario
 Scenario.name = marajo_archipelago
 # Se é para criar conexão entre os nós
 Scenario.simulateConnections = true
@@ -27,9 +27,9 @@ highspeedInterface.type = SimpleBroadcastInterface
 
 #----Velocity------------------------------------
 # For 6Mbps. One byte is 8 bits, therefore 250k bytes is 2M bits. It's common practice to use B=byte and b=bit. Transmit speed is in bytes so you want 750k, not 6M.
-# Velocidade de Transmissão para 2 Mbps = 250kBps
+# Velocidade de Transmissão para 2 Mbps = 200kBps
 # Velocidade de Transmissão para 11 Mbps = 1375kBps
-highspeedInterface.transmitSpeed = 200k
+highspeedInterface.transmitSpeed = 250k
 # In this case we will use an antenna with amplifier - Area de cobertura em metros
 highspeedInterface.transmitRange = 40
 
@@ -42,7 +42,7 @@ Scenario.nrofHostGroups = 27
 Group.movementModel = MapRouteMovement
 Group.router = NewRouter
 Group.routeType = 1
-Group.bufferSize = 19.9M
+#Group.bufferSize = 3000
 Group.waitTime = 0, 0
 Group.speed = 1, 1
 Group.nrofInterfaces = 1
