@@ -559,8 +559,11 @@ public class DTNHost implements Comparable<DTNHost> {
 	}
 	
 	public void setConnectdToPBS(double startTime) {
-		if(startTime > this.timeToEndConnectionToPBS)
-			this.timeToEndConnectionToPBS = startTime+20*60;
+		if(startTime > this.timeToEndConnectionToPBS) {
+			// set the value for the duration you want boat to stop at PBS
+			int timeInMinute = 20;
+			this.timeToEndConnectionToPBS = startTime+timeInMinute*60;
+		}
 	}
 
 	public double getTimeToEndConnectionToPBS() {

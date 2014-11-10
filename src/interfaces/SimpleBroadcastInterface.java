@@ -69,9 +69,13 @@ public class SimpleBroadcastInterface extends NetworkInterface {
 			if (conSpeed > this.transmitSpeed) {
 				conSpeed = this.transmitSpeed; 
 			}
-
+			//Rachit
+			if(this.host.isConnectionBroken() || anotherInterface.getHost().isConnectionBroken()) {
+				return;
+			}
 			Connection con = new CBRConnection(this.host, this, 
 					anotherInterface.getHost(), anotherInterface, conSpeed);
+			
 			connect(con,anotherInterface);
 			
 			//Write New Connection in file here

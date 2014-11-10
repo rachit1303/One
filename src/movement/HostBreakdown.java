@@ -16,9 +16,9 @@ public class HostBreakdown {
 	}
 	
 	public void setBreakdownState() {
-		if( SimClock.getTime() > this.end) {
+		if( SimClock.getTime() > this.end+1) {
 			this.start = SimClock.getTime();
-			this.end = start + durationOfBreakdown()*60*60;
+			this.end = start + durationOfBreakdown()*60.0*60.0;
 		}
 	}
 	
@@ -36,6 +36,7 @@ public class HostBreakdown {
 	// returns true if boats break down else false
 	private boolean probabilityOfBreakdown() {
 		Random randomNumberGenerator = new Random();
+		// set the argument as n for probability of 1/n+1
 		int number = randomNumberGenerator.nextInt(44);
 		// marking '0' as a number which results in breakdown of a host
 		// since number can take any value from 0 to 44 (both inclusive) with equal probability
@@ -54,6 +55,7 @@ public class HostBreakdown {
 			Random randomNumberGenerator = new Random();
 			int number = randomNumberGenerator.nextInt(5);
 			return duration[number];
+			// return 1;
 		}
 		return -1;
 	}
