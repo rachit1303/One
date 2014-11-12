@@ -7,6 +7,8 @@ package core;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Random;
+
 import movement.HostBreakdown;
 import movement.MovementModel;
 import movement.Path;
@@ -38,9 +40,8 @@ public class DTNHost implements Comparable<DTNHost> {
 	private HostBreakdown state;
 	private boolean connected; 
 	private double timeToEndConnectionToPBS;
+	private boolean isOnlyDelayed;
 	
-
-
 	static {
 		DTNSim.registerForReset(DTNHost.class.getCanonicalName());
 		reset();
@@ -97,6 +98,7 @@ public class DTNHost implements Comparable<DTNHost> {
 		// RACHIT: Setting the default value to null
 		this.state = null;
 		this.timeToEndConnectionToPBS = -1.0;
+		this.isOnlyDelayed = false;
 	}
 	
 	/**
@@ -541,6 +543,9 @@ public class DTNHost implements Comparable<DTNHost> {
 		}
 		boolean state = this.state.isBroken();
 		if(state) {
+			this.setOnlyDelayed();
+		}
+		if(state && !this.isOnlyDelayed) {
 			List<Message> messages = new ArrayList<Message>(this.getMessageCollection());
 			for(Message m : messages)
 				this.deleteMessage(m.getId(), false);
@@ -561,13 +566,28 @@ public class DTNHost implements Comparable<DTNHost> {
 	public void setConnectdToPBS(double startTime) {
 		if(startTime > this.timeToEndConnectionToPBS) {
 			// set the value for the duration you want boat to stop at PBS
+			// if boat was delayed but not broken then it stops only for 5 minutes at PBS
 			int timeInMinute = 20;
+			if(this.isOnlyDelayed) {
+				timeInMinute = 5; 
+			}
 			this.timeToEndConnectionToPBS = startTime+timeInMinute*60;
 		}
 	}
 
 	public double getTimeToEndConnectionToPBS() {
 		return this.timeToEndConnectionToPBS;
+	}
+	
+	// the whole broken code remains the same
+	// but of consider that boat was only delayed, its transmitter and receiver were working fine
+	// we set this variable to true with 50% probability.
+	public void setOnlyDelayed() {
+		Random randomNumberGenerator = new Random();
+		int number = randomNumberGenerator.nextInt(1);
+		if(number == 0) {
+			this.isOnlyDelayed = true;
+		}
 	}
 
 }

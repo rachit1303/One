@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.Set;
 
 /**
@@ -390,6 +391,17 @@ public class Message implements Comparable<Message> {
 	
 	public int[] getGVector() {
 		return Gmatrix;
+	}
+	
+	//Rachit
+	public boolean canMessageBeTransfered() {
+		Random randomNumberGenerator = new Random();
+		int number = randomNumberGenerator.nextInt(9);
+		// we have 70% probability that message might be transferred
+		// can be 100% or 50%
+		if(number < 3)
+			return false;
+		return true;
 	}
 	
 }

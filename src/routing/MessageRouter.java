@@ -62,6 +62,9 @@ public abstract class MessageRouter {
 	public static final int DENIED_NO_SPACE = -2;
 	/** Receive return value for messages whose TTL has expired */
 	public static final int DENIED_TTL = -3;
+	//Rachit
+	/** Receive return value for unspecified reason */
+	public static final int DENIED_TRANSMISSION_FAILURE = -4;
 	/** Receive return value for unspecified reason */
 	public static final int DENIED_UNSPECIFIED = -999;
 	
@@ -287,7 +290,11 @@ public abstract class MessageRouter {
 	 */
 	public int receiveMessage(Message m, DTNHost from) {
 		Message newMessage = m.replicate();
-				
+		
+		// Rachit
+		if(!newMessage.canMessageBeTransfered()) {
+			return DENIED_TRANSMISSION_FAILURE;
+		}
 		this.putToIncomingBuffer(newMessage, from);		
 		newMessage.addNodeOnPath(this.host);
 		

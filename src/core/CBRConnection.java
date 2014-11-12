@@ -72,6 +72,7 @@ public class CBRConnection extends Connection {
 		this.msgFromNode = from;
 		Message newMessage = m.replicate();
 		
+		
 		int retVal = getOtherNode(from).receiveMessage(newMessage, from);
 
 		if (retVal == MessageRouter.RCV_OK) {
@@ -79,6 +80,12 @@ public class CBRConnection extends Connection {
 			this.transferDoneTime = SimClock.getTime() + 
 			(1.0*m.getSize()) / this.speed;
 			
+			///Delete the original message here
+			from.deleteMessage(m.getId(), false);
+		}
+		
+		// Rachit
+		if (retVal == MessageRouter.DENIED_TRANSMISSION_FAILURE) {
 			///Delete the original message here
 			from.deleteMessage(m.getId(), false);
 		}

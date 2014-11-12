@@ -19,8 +19,8 @@ Scenario.simulateConnections = true
 Scenario.updateInterval = 0.1
 
 #-----Simulation Time --------------------------
-# 43200 == 12h 86400 = 24h
-Scenario.endTime = 86400
+# 43200 == 12h 86400 = 24h 72000 = 20hrs
+Scenario.endTime = 72000
 # Interface wireless para todos os nós
 # firstinterface.type = SimpleBroadcastInterface
 highspeedInterface.type = SimpleBroadcastInterface
@@ -29,13 +29,14 @@ highspeedInterface.type = SimpleBroadcastInterface
 # For 6Mbps. One byte is 8 bits, therefore 250k bytes is 2M bits. It's common practice to use B=byte and b=bit. Transmit speed is in bytes so you want 750k, not 6M.
 # Velocidade de Transmissão para 2 Mbps = 200kBps
 # Velocidade de Transmissão para 11 Mbps = 1375kBps
-highspeedInterface.transmitSpeed = 250k
+# Velocidade de Transmissão para 30 Mbps = 3750kBps
+highspeedInterface.transmitSpeed = 3750k
 # In this case we will use an antenna with amplifier - Area de cobertura em metros
 highspeedInterface.transmitRange = 40
 
 # Número de grupos. São  6 no total 
 # 10 representam PBS e 6 representam os barcos
-Scenario.nrofHostGroups = 27
+Scenario.nrofHostGroups = 22
 
 #----- Configurações Gerais válidas para todos do grupo
 # Modelo de movimento para todos os nós
@@ -262,9 +263,10 @@ Events.nrof = 9
 Events1.class = MessageEventGenerator
 # (following settings are specific for the MessageEventGenerator class)
 # Creation interval in seconds (one new message every 25 to 35 seconds) 864s/packet
-Events1.interval = 864
+Events1.interval = 1440
 # Message sizes (50kB - 150kB) small size: 576Bytes  boat-to-boat limitation: 75KB
-Events1.size = 75k
+# file size 75Mb and number of packets 161 then  = 75000/161 = 465
+Events1.size = 465k
 # range of message source/destination addresses
 # Existem 8 PBS, por isso o 8
 Events1.hosts = 13, 21

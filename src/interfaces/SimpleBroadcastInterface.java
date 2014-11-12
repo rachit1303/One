@@ -7,7 +7,7 @@ package interfaces;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Collection;
-
+import java.util.Random;
 import core.CBRConnection;
 import core.Connection;
 import core.DTNHost;
@@ -39,6 +39,17 @@ public class SimpleBroadcastInterface extends NetworkInterface {
 	public NetworkInterface replicate()	{
 		return new SimpleBroadcastInterface(this);
 	}
+	
+	//Rachit
+	public double getTransmitSpeedMultiplyingFactorInRainyCondition() {
+		Random randomNumberGenerator = new Random();
+		int number = randomNumberGenerator.nextInt(1);
+		// we have 50% probability of rain thats, why generation random number from 0...1
+		// the transmission speed decreases to 30%of original value in case it rains.
+		if(number == 0)
+			return 0.3;
+		return 1.0;
+	}
 
 	/**
 	 * Tries to connect this host to another host. The other host must be
@@ -64,11 +75,17 @@ public class SimpleBroadcastInterface extends NetworkInterface {
 					anotherInterface.getHost().setConnectdToPBS(SimClock.getTime());
 					anotherInterface.getHost().setBreakdownState();
 				}
+				
 			}
 			int conSpeed = anotherInterface.getTransmitSpeed();
 			if (conSpeed > this.transmitSpeed) {
-				conSpeed = this.transmitSpeed; 
+				conSpeed = this.transmitSpeed;
 			}
+			
+			conSpeed = (int)(conSpeed*getTransmitSpeedMultiplyingFactorInRainyCondition());
+			
+			
+			
 			//Rachit
 			if(this.host.isConnectionBroken() || anotherInterface.getHost().isConnectionBroken()) {
 				return;
@@ -151,7 +168,8 @@ public class SimpleBroadcastInterface extends NetworkInterface {
 			if (conSpeed > this.transmitSpeed) {
 				conSpeed = this.transmitSpeed; 
 			}
-
+			
+			conSpeed = (int)(conSpeed*getTransmitSpeedMultiplyingFactorInRainyCondition());
 			Connection con = new CBRConnection(this.host, this, 
 					anotherInterface.getHost(), anotherInterface, conSpeed);
 			connect(con,anotherInterface);
