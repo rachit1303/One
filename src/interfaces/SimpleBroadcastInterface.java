@@ -47,8 +47,8 @@ public class SimpleBroadcastInterface extends NetworkInterface {
 		// we have 50% probability of rain thats, why generation random number from 0...1
 		// the transmission speed decreases to 30%of original value in case it rains.
 		if(number == 0)
-			return 0.3;
-		return 1.0;
+			return 1.0;
+		return 0.3;
 	}
 
 	/**

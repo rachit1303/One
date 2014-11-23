@@ -42,7 +42,7 @@ public class HostBreakdown {
 		// since number can take any value from 0 to 44 (both inclusive) with equal probability
 		// hence probability of getting 0 is 1/45
 		// use -1 in order to enforce no breakdown
-		if(number == 0)
+		if(number == -1)
 			return true;
 		else 
 			return false;

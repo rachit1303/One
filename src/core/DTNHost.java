@@ -586,8 +586,9 @@ public class DTNHost implements Comparable<DTNHost> {
 		Random randomNumberGenerator = new Random();
 		int number = randomNumberGenerator.nextInt(1);
 		if(number == 0) {
-			this.isOnlyDelayed = true;
+			this.isOnlyDelayed = false;
 		}
+		this.isOnlyDelayed = true;
 	}
 
 }

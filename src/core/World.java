@@ -179,8 +179,10 @@ public class World {
 		
 		setNextEventQueue();
 
+		// Rachit
+		// the value was hard coded to run event generation upto 12 hours only - changes it to 72000 + 1440
 		/* process all events that are due until next interval update */
-		while (this.nextQueueEventTime <= runUntil && runUntil <= 43201) {
+		while (this.nextQueueEventTime <= runUntil && runUntil <= 73440) {
 			simClock.setTime(this.nextQueueEventTime);
 			ExternalEvent ee = this.nextEventQueue.nextEvent();
 			ee.processEvent(this);

@@ -396,12 +396,11 @@ public class Message implements Comparable<Message> {
 	//Rachit
 	public boolean canMessageBeTransfered() {
 		Random randomNumberGenerator = new Random();
-		int number = randomNumberGenerator.nextInt(9);
-		// we have 70% probability that message might be transferred
-		// can be 100% or 50%
+		int number = randomNumberGenerator.nextInt(2);
+		// we can have 100% or 70% or 50% probability that message might be transferred
 		if(number < 3)
-			return false;
-		return true;
+			return true;
+		return false;
 	}
 	
 }

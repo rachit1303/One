@@ -20,7 +20,7 @@ Scenario.updateInterval = 0.1
 
 #-----Simulation Time --------------------------
 # 43200 == 12h 86400 = 24h 72000 = 20hrs
-Scenario.endTime = 72000
+Scenario.endTime = 86400
 # Interface wireless para todos os nós
 # firstinterface.type = SimpleBroadcastInterface
 highspeedInterface.type = SimpleBroadcastInterface
@@ -151,6 +151,33 @@ Boat26.DP = PBS_MNA17, PBS_Belem13
 Group27.groupID = Boat27_
 Group27.routeFile = data/CoDPON/RT_New5_PPD_SRE.wkt
 Boat27.DP = PBS_PPD18, PBS_SRE20
+
+
+# group28
+# Group28.groupID = Boat28_
+# Group28.routeFile = data/CoDPON/RT_New1_MNA_SST.wkt
+# Boat28.DP = PBS_MNA17, PBS_SST21
+
+# group29
+# Group29.groupID = Boat29_
+# Group29.routeFile = data/CoDPON/RT_New2_BLM_PRT.wkt
+# Boat29.DP = PBS_Belem13, PBS_PRT19
+
+# group30
+# Group30.groupID = Boat30_
+# Group30.routeFile = data/CoDPON/RT_New3_BRV_PPD.wkt
+# Boat30.DP = PBS_Breves14, PBS_PPD18
+
+# group31
+# Group31.groupID = Boat31_
+# Group31.routeFile = data/CoDPON/RT_New4_MNA_BLM.wkt
+# Boat31.DP = PBS_MNA17, PBS_Belem13
+
+# group32
+# Group32.groupID = Boat32_
+# Group32.routeFile = data/CoDPON/RT_New5_PPD_SRE.wkt
+# Boat32.DP = PBS_PPD18, PBS_SRE20
+
 
 # group28
 # Group28.groupID = Boat28_
