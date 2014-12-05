@@ -584,7 +584,7 @@ public class DTNHost implements Comparable<DTNHost> {
 	// we set this variable to true with 50% probability.
 	public void setOnlyDelayed() {
 		Random randomNumberGenerator = new Random();
-		int number = randomNumberGenerator.nextInt(1);
+		int number = randomNumberGenerator.nextInt(2);
 		if(number == 0) {
 			this.isOnlyDelayed = false;
 		}

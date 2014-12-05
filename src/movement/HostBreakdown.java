@@ -37,12 +37,12 @@ public class HostBreakdown {
 	private boolean probabilityOfBreakdown() {
 		Random randomNumberGenerator = new Random();
 		// set the argument as n for probability of 1/n+1
-		int number = randomNumberGenerator.nextInt(44);
+		int number = randomNumberGenerator.nextInt(45);
 		// marking '0' as a number which results in breakdown of a host
-		// since number can take any value from 0 to 44 (both inclusive) with equal probability
+		// since number can take any value from 0(inclusive) to 45(exclusive) with equal probability
 		// hence probability of getting 0 is 1/45
 		// use -1 in order to enforce no breakdown
-		if(number == -1)
+		if(number == 0)
 			return true;
 		else 
 			return false;
@@ -53,7 +53,7 @@ public class HostBreakdown {
 	private double durationOfBreakdown() {
 		if(probabilityOfBreakdown()) {
 			Random randomNumberGenerator = new Random();
-			int number = randomNumberGenerator.nextInt(5);
+			int number = randomNumberGenerator.nextInt(6);
 			return duration[number];
 			// return 1;
 		}

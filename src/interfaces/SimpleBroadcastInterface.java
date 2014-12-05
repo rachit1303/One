@@ -43,7 +43,7 @@ public class SimpleBroadcastInterface extends NetworkInterface {
 	//Rachit
 	public double getTransmitSpeedMultiplyingFactorInRainyCondition() {
 		Random randomNumberGenerator = new Random();
-		int number = randomNumberGenerator.nextInt(1);
+		int number = randomNumberGenerator.nextInt(2);
 		// we have 50% probability of rain thats, why generation random number from 0...1
 		// the transmission speed decreases to 30%of original value in case it rains.
 		if(number == 0)

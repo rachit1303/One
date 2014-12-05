@@ -393,12 +393,12 @@ public class Message implements Comparable<Message> {
 		return Gmatrix;
 	}
 	
-	//Rachit
+	// Rachit
 	public boolean canMessageBeTransfered() {
 		Random randomNumberGenerator = new Random();
-		int number = randomNumberGenerator.nextInt(2);
+		int number = randomNumberGenerator.nextInt(100);
 		// we can have 100% or 70% or 50% probability that message might be transferred
-		if(number < 3)
+		if(number < 100)
 			return true;
 		return false;
 	}
