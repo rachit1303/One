@@ -61,6 +61,9 @@ public class Message implements Comparable<Message> {
 		DTNSim.registerForReset(Message.class.getCanonicalName());
 	}
 	
+	//RACHIT
+	private boolean waitForAcknowledgement;
+	
 	/**
 	 * Creates a new Message.
 	 * @param from Who the message is (originally) from
@@ -91,6 +94,8 @@ public class Message implements Comparable<Message> {
 		
 		Message.nextUniqueId++;
 		addNodeOnPath(from);
+		
+		this.waitForAcknowledgement = false;
 	}
 	
 	public int[] SetSourceCode (int[] temp) {
@@ -401,6 +406,14 @@ public class Message implements Comparable<Message> {
 		if(number < 100)
 			return true;
 		return false;
+	}
+	
+	public boolean getWaitForAcknowledgement() {
+		return this.waitForAcknowledgement;
+	}
+	
+	public void setWaitForAcknowledgement(boolean flag) {
+		this.waitForAcknowledgement = flag;
 	}
 	
 }

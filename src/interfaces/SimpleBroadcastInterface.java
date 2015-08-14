@@ -65,7 +65,6 @@ public class SimpleBroadcastInterface extends NetworkInterface {
 				&& (this != anotherInterface)) {
 			// new contact within range
 			// connection speed is the lower one of the two speeds 
-			// RACHIT :
 			if(!this.host.isConnected() && !anotherInterface.getHost().isConnected()) {
 				if(anotherInterface.getHost().getName().startsWith("PBS") && !this.host.getName().startsWith("PBS")) {
 					this.host.setConnectdToPBS(SimClock.getTime());
@@ -84,9 +83,6 @@ public class SimpleBroadcastInterface extends NetworkInterface {
 			
 			conSpeed = (int)(conSpeed*getTransmitSpeedMultiplyingFactorInRainyCondition());
 			
-			
-			
-			//Rachit
 			if(this.host.isConnectionBroken() || anotherInterface.getHost().isConnectionBroken()) {
 				return;
 			}
@@ -95,20 +91,6 @@ public class SimpleBroadcastInterface extends NetworkInterface {
 			
 			connect(con,anotherInterface);
 			
-			//Write New Connection in file here
-			/*
-			DTNHost To = con.ToNode();
-			DTNHost From = con.FromNode();
-
-			try {
-				FileWriter fw = new FileWriter("C:\\connection.txt", true);
-				fw.write(Integer.toString(To.getAddress()) + " " + Integer.toString(From.getAddress()) + " " + SimClock.getTime() + " Up\r\n");
-	            fw.close();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			*/
 		}
 	}
 
@@ -128,19 +110,6 @@ public class SimpleBroadcastInterface extends NetworkInterface {
 
 			if (!isWithinRange(anotherInterface)) {
 				
-				//Write Connection Down into file here
-				/*
-				DTNHost To = con.ToNode();
-				DTNHost From = con.FromNode();
-				try {
-					FileWriter fw = new FileWriter("C:\\connection.txt", true);
-					fw.write(Integer.toString(To.getAddress()) + " " + Integer.toString(From.getAddress()) + " " + SimClock.getTime() + " Down\r\n");
-		            fw.close();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				*/
 				disconnect(con,anotherInterface);
 				connections.remove(i);
 			}

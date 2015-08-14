@@ -458,6 +458,17 @@ public abstract class ActiveRouter extends MessageRouter {
 			List<Message> messages, ArrayList<String[]> BoatDP,
 			ArrayList<String> PBS_Sequence) {
 		for (Message m : messages) {
+			// RACHIT
+			// check if message was already transferred and is just waiting for acknowledgement
+			if(m.getWaitForAcknowledgement() && (m.getFrom() == con.FromNode() || m.getFrom() == con.ToNode())) {
+				DTNHost N = m.getFrom();
+				DTNHost fN = con.FromNode();
+				DTNHost fNN = con.ToNode();
+				
+				continue;
+			}
+			DTNHost N = m.getFrom();
+			DTNHost fN = con.FromNode();
 			// from to is just node pair
 			DTNHost ToNode = con.ToNode();
 			DTNHost FromNode = con.FromNode();
@@ -466,7 +477,9 @@ public abstract class ActiveRouter extends MessageRouter {
 
 			String ToNodeName = ToNode.getName();
 			String FromNodeName = FromNode.getName();
-
+			
+			
+			
 			// One node is Boat and the other node is PBS
 			if (ToNodeName.contains("Boat") && FromNodeName.contains("PBS")) {
 

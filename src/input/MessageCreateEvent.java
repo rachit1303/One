@@ -15,7 +15,7 @@ import core.World;
 public class MessageCreateEvent extends MessageEvent {
 	private int size;
 	private int responseSize;
-	private int generateNumN = 175;
+	private int generateNumN = 205;
 	
 	/**
 	 * Creates a message creation event with a optional response request

@@ -349,7 +349,7 @@ public abstract class MessageRouter {
 		}
 		else if (isFirstDelivery) {
 			this.deliveredMessages.put(id, aMessage);
-			
+			// Check for this - RACHIT
 			// Remove the message after first delivery
 			from.deleteMessage(aMessage.getId(), false);
 

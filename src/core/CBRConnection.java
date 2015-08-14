@@ -81,13 +81,18 @@ public class CBRConnection extends Connection {
 			(1.0*m.getSize()) / this.speed;
 			
 			///Delete the original message here
-			from.deleteMessage(m.getId(), false);
+			if(from != m.getFrom())
+				from.deleteMessage(m.getId(), false);
+			// mark message to wait for acknowledgement
+			if(from == m.getFrom())
+				m.setWaitForAcknowledgement(true);
 		}
 		
 		// Rachit
 		if (retVal == MessageRouter.DENIED_TRANSMISSION_FAILURE) {
 			///Delete the original message here
-			from.deleteMessage(m.getId(), false);
+			if(from != m.getFrom())
+				from.deleteMessage(m.getId(), false);
 		}
 
 		return retVal;

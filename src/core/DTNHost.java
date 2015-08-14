@@ -579,7 +579,7 @@ public class DTNHost implements Comparable<DTNHost> {
 		return this.timeToEndConnectionToPBS;
 	}
 	
-	// the whole broken code remains the same
+	// the whole boat break code remains the same
 	// but of consider that boat was only delayed, its transmitter and receiver were working fine
 	// we set this variable to true with 50% probability.
 	public void setOnlyDelayed() {
