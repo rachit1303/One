@@ -1,0 +1,65 @@
+clc
+clear all 
+
+boat_pbs = [1 0 1 0 0 0 0 1 0;
+            1 0 0 0 1 1 0 0 0;
+            1 0 0 0 0 1 0 0 0;
+            1 0 0 0 0 0 0 1 0;
+            1 0 0 0 0 0 0 0 1;
+            0 1 0 1 0 0 0 0 0;
+            0 1 1 0 0 0 0 0 0;
+            0 0 0 1 0 0 1 0 0;
+            0 0 0 0 1 0 0 0 0;
+            0 0 0 0 0 1 0 0 0;
+            0 0 0 0 0 0 1 0 0;
+            0 0 0 0 0 0 0 1 0;
+            0 0 0 0 0 0 0 0 1;
+            0 0 0 0 1 0 0 0 1;
+            1 0 0 0 0 0 1 0 0;
+            0 1 0 0 0 1 0 0 0;
+            1 0 0 0 1 0 0 0 0;
+            0 0 0 0 0 1 0 1 0];
+ 
+boat = [13 20 18 17 21 15 14 16 19];
+b_p = [1 1 1 1 1 0 0 0 0 0 0 0 0 0 1 0 1 0;
+       1 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 1;
+       0 1 1 0 0 0 0 0 0 1 0 0 0 0 0 1 0 1;
+       0 1 0 0 0 0 0 0 1 0 0 0 0 1 0 0 1 0;
+       0 0 0 0 1 0 0 0 0 0 0 0 1 1 0 0 0 0;
+       1 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0;
+       0 0 0 0 0 1 1 0 0 0 0 0 0 0 0 1 0 0;
+       0 0 0 0 0 1 0 1 0 0 0 0 0 0 0 0 0 0;
+       0 0 0 0 0 0 0 1 0 0 1 0 0 0 1 0 0 0];
+        
+        
+        
+        
+% boat_pbs = [2 1  0 2  1 1 0; 0 0  1 0  2 2 5; 1 0  3 0  4 0 0];
+correlation_bp = b_p*b_p';
+ for i=1:size(correlation_bp,1)
+     for j=1:size(correlation_bp,2)
+         association_bp(i,j)=correlation_bp(i,j)/(correlation_bp(i,i)+correlation_bp(j,j)-correlation_bp(i,j));
+     end
+ end
+ correlation1_bp = association_bp*association_bp';
+  for i=1:size(correlation1_bp,1)
+     for j=1:size(correlation1_bp,2)
+         scalar_bp(i,j)=correlation1_bp(i,j)/(norm(correlation1_bp(i,:),2)*norm(correlation1_bp(:,j),2));
+     end
+ end
+ 
+ 
+
+correlation = boat_pbs'*boat_pbs;
+ for i=1:size(correlation,1)
+     for j=1:size(correlation,2)
+         association(i,j)=correlation(i,j)/(correlation(i,i)+correlation(j,j)-correlation(i,j));
+     end
+ end
+ 
+ correlation1 = association*association';
+  for i=1:size(correlation1,1)
+     for j=1:size(correlation1,2)
+         scalar(i,j)=correlation1(i,j)/(norm(association(i,:),2)*norm(association(:,j),2));
+     end
+ end

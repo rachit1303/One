@@ -1,0 +1,313 @@
+# Default settings for the simulation
+# By Mauro Margalho Coutinho
+
+
+#10M/message file, 75Kb/packets, 133.3 partitions, 50 files/day, 25files/12h, 12 files/6h, 1728s/file #
+#50M/message file, 75Kb/packets, 666.6 partitions, 50 files/day, 50files/12h, 25 files/6h, 864s/file #
+#10M/message file, 75Kb/packets, 133.3 partitions, 50 files/day, 50files/12h, 25 files/6h, 864s/file #
+
+
+#50M/message file, 1M/packets, 50 partitions, 50 files/day, 50files/12h, 25 files/6h, 864s/file  BufferSize 100M#
+
+## Scenario settings
+#-----Identification----------------------------
+# A name to identify this scenario
+Scenario.name = marajo_archipelago
+# Se é para criar conexão entre os nós
+Scenario.simulateConnections = true
+# Frequência com a qual se obterá uma amostragem da simulação
+Scenario.updateInterval = 0.1
+
+#-----Simulation Time --------------------------
+# 43200 == 12h 86400 = 24h
+Scenario.endTime = 86400
+# Interface wireless para todos os nós
+# firstinterface.type = SimpleBroadcastInterface
+highspeedInterface.type = SimpleBroadcastInterface
+
+#----Velocity------------------------------------
+# For 6Mbps. One byte is 8 bits, therefore 250k bytes is 2M bits. It's common practice to use B=byte and b=bit. Transmit speed is in bytes so you want 750k, not 6M.
+# Velocidade de Transmissão para 2 Mbps = 250kBps
+# Velocidade de Transmissão para 11 Mbps = 1375kBps
+highspeedInterface.transmitSpeed = 200k
+# In this case we will use an antenna with amplifier - Area de cobertura em metros
+highspeedInterface.transmitRange = 40
+
+# Número de grupos. São  6 no total 
+# 10 representam PBS e 6 representam os barcos
+Scenario.nrofHostGroups = 27
+
+#----- Configurações Gerais válidas para todos do grupo
+# Modelo de movimento para todos os nós
+Group.movementModel = MapRouteMovement
+Group.router = NewRouter
+Group.routeType = 1
+Group.bufferSize = 3000M
+Group.waitTime = 0, 0
+Group.speed = 1, 1
+Group.nrofInterfaces = 1
+Group.interface1 = highspeedInterface
+Group.nrofHosts = 1
+# Message TTL of 300 minutes (5 hours) 1440 = 24 hours
+Group.msgTtl = 1440
+Group.sendQueue = 1 
+# 1:shuffle, 2:sort by creation time
+
+# representa o nũmero de PBS por grupo
+
+# Group.nrofApplications = 0
+
+
+
+# ------ Displacement Plans (Boats)----------------------------------
+
+# group1 (Rota Belem->Curralinho) specific settings
+Group1.groupID = Boat1_
+Group1.routeFile = data/CoDPON/RT_SRE_BLM_CUR.wkt
+Boat1.DP = PBS_SRE20, PBS_Belem13, PBS_Curralinho15
+
+# group2 (Rota Belem->Muana) specific settings
+Group2.groupID = Boat2_
+Group2.routeFile = data/CoDPON/RT_PPD_BLM_MNA.wkt
+Boat2.DP = PBS_PPD18, PBS_Belem13, PBS_MNA17
+
+# group3 (Rota Belem->Ponta de Pedras) specific settings
+Group3.groupID = Boat3_
+Group3.routeFile = data/CoDPON/RT_BLM_PPD.wkt
+Boat3.DP = PBS_Belem13, PBS_PPD18
+
+# group4 (Rota Belem->Soure) specific settings
+Group4.groupID = Boat4_
+Group4.routeFile = data/CoDPON/RT_BLM_SRE.wkt
+Boat4.DP = PBS_Belem13, PBS_SRE20
+
+# group5 (Rota Belem->São Sebastião) specific settings
+Group5.groupID = Boat5_
+Group5.routeFile = data/CoDPON/RT_BLM_SST.wkt
+Boat5.DP = PBS_Belem13, PBS_SST21
+
+# group6 (Rota Breves->Melgaço) specific settings
+Group6.groupID = Boat6_
+Group6.routeFile = data/CoDPON/RT_BRV_MGC.wkt
+Boat6.DP = PBS_Breves14, PBS_MGC16
+
+# group7 (Rota Curralinho->Breves) specific settings
+Group7.groupID = Boat7_
+Group7.routeFile = data/CoDPON/RT_CUR_BRV.wkt
+Boat7.DP = PBS_Curralinho15, PBS_Breves14
+
+# group8 (Rota Melgaço->Portel) specific settings
+Group8.groupID = Boat8_
+Group8.routeFile = data/CoDPON/RT_MGC_PRT.wkt
+Boat8.DP = PBS_MGC16, PBS_PRT19
+
+# group9 (Rota Muana->Vilarejos Ribeirinhos) specific settings
+Group9.groupID = Boat9_
+Group9.routeFile = data/CoDPON/RT_MNA_RIV.wkt
+Boat9.DP = PBS_MNA17, PBS_RIV23
+
+# group10 (Rota Ponta de Pedras->Vilarejos Ribeirinhos) specific settings
+Group10.groupID = Boat10_
+Group10.routeFile = data/CoDPON/RT_PPD_RIV.wkt
+Boat10.DP = PBS_PPD18, PBS_RIV23
+
+# group11 (Rota Portel->Vilarejos Ribeirinhos) specific settings
+Group11.groupID = Boat11_
+Group11.routeFile = data/CoDPON/RT_PRT_RIV.wkt
+Boat11.DP = PBS_PRT19, PBS_RIV23
+
+# group12 (Soure->Vilarejos Ribeirinhos) specific settings
+Group12.groupID = Boat12_
+Group12.routeFile = data/CoDPON/RT_SRE_RIV.wkt
+Boat12.DP = PBS_SRE20, PBS_RIV23
+
+# group13 (São Sebastião->Vilarejos Ribeirinhos) specific settings
+Group13.groupID = Boat13_
+Group13.routeFile = data/CoDPON/RT_SST_RIV.wkt
+Boat13.DP = PBS_SST21, PBS_RIV23
+
+# group23
+Group23.groupID = Boat23_
+Group23.routeFile = data/CoDPON/RT_New1_MNA_SST.wkt
+Boat23.DP = PBS_MNA17, PBS_SST21
+
+# group24
+Group24.groupID = Boat24_
+Group24.routeFile = data/CoDPON/RT_New2_BLM_PRT.wkt
+Boat24.DP = PBS_Belem13, PBS_PRT19
+
+# group25
+Group25.groupID = Boat25_
+Group25.routeFile = data/CoDPON/RT_New3_BRV_PPD.wkt
+Boat25.DP = PBS_Breves14, PBS_PPD18
+
+# group26
+Group26.groupID = Boat26_
+Group26.routeFile = data/CoDPON/RT_New4_MNA_BLM.wkt
+Boat26.DP = PBS_MNA17, PBS_Belem13
+
+# group27
+Group27.groupID = Boat27_
+Group27.routeFile = data/CoDPON/RT_New5_PPD_SRE.wkt
+Boat27.DP = PBS_PPD18, PBS_SRE20
+
+# group28
+# Group28.groupID = Boat28_
+# Group28.routeFile = data/CoDPON/RT_New2_BLM_PRT.wkt
+# Boat28.DP = PBS_Belem13, PBS_PRT19
+
+# group29
+# Group29.groupID = Boat29_
+# Group29.routeFile = data/CoDPON/RT_New2_BLM_PRT.wkt
+# Boat29.DP = PBS_Belem13, PBS_PRT19
+
+# group30
+# Group30.groupID = Boat30_
+# Group30.routeFile = data/CoDPON/RT_New2_BLM_PRT.wkt
+# Boat30.DP = PBS_Belem13, PBS_PRT19
+
+
+
+# ------ Peer Base Station ----------------------------------
+
+# group14 (Peers Base Stations) specific settings
+Group14.groupID = PBS_Belem
+Group14.nrofHosts = 1
+Group14.movementModel = StationaryMovement
+# POINT (10783.622013356271 879.7386656151306)
+Group14.nodeLocation = 10783, 9121
+Group14.clusterCenter = 10783, 9121
+
+
+Group15.groupID = PBS_Breves
+Group15.nrofHosts = 1
+Group15.movementModel = StationaryMovement
+# POINT (3019.9676623510304 1497.7855687975007)
+Group15.nodeLocation = 3019, 8513
+
+Group16.groupID = PBS_Curralinho
+Group16.nrofHosts = 1
+Group16.movementModel = StationaryMovement
+# POINT (4278.383417733461 827.1328608391995)
+# O valor do Y foi obtido a partir de 10000 (valor do Y no originboat) - 827 que é o valor do Y aqui
+Group16.nodeLocation = 4278, 9173
+
+Group17.groupID = PBS_MGC
+Group17.nrofHosts = 1
+Group17.movementModel = StationaryMovement
+# POINT (2168.4647859545353 1045.6601477020167)
+Group17.nodeLocation = 2168, 8955
+
+Group18.groupID = PBS_MNA
+Group18.nrofHosts = 1
+Group18.movementModel = StationaryMovement
+# POINT (7134.308994319934 1060.7309950718663)
+Group18.nodeLocation = 7134, 8940
+
+Group19.groupID = PBS_PPD
+Group19.nrofHosts = 1
+Group19.movementModel = StationaryMovement
+# POINT (9176.408812934538 1633.4231951261459)
+Group19.nodeLocation = 9176, 8367
+
+Group20.groupID = PBS_PRT
+Group20.nrofHosts = 1
+Group20.movementModel = StationaryMovement
+# POINT (1547.8640932368073 864.1589925283147)
+Group20.nodeLocation = 1547, 9136
+
+Group21.groupID = PBS_SRE
+Group21.nrofHosts = 1
+Group21.movementModel = StationaryMovement
+# POINT (10984.910497316474 3125.4370847412433)
+Group21.nodeLocation = 10984, 6875
+
+Group22.groupID = PBS_SST
+Group22.nrofHosts = 1
+Group22.movementModel = StationaryMovement
+# POINT (5612.153409965138 910.0225213733714)
+Group22.nodeLocation = 5612, 9090
+
+#-----------------------------------------------------------------------------
+
+## Map based movement -movement model specific settings
+MapBasedMovement.nrofMapFiles = 19
+MapBasedMovement.mapFile1 = data/CoDPON/RT_SRE_BLM_CUR.wkt
+MapBasedMovement.mapFile2 = data/CoDPON/RT_PPD_BLM_MNA.wkt
+MapBasedMovement.mapFile3 = data/CoDPON/RT_BLM_PPD.wkt
+MapBasedMovement.mapFile4 = data/CoDPON/RT_BLM_SRE.wkt
+MapBasedMovement.mapFile5 = data/CoDPON/RT_BLM_SST.wkt
+MapBasedMovement.mapFile6 = data/CoDPON/RT_BRV_MGC.wkt
+MapBasedMovement.mapFile7 = data/CoDPON/RT_CUR_BRV.wkt
+MapBasedMovement.mapFile8 = data/CoDPON/RT_MGC_PRT.wkt
+MapBasedMovement.mapFile9 = data/CoDPON/RT_MNA_RIV.wkt
+MapBasedMovement.mapFile10 = data/CoDPON/RT_PPD_RIV.wkt
+MapBasedMovement.mapFile11 = data/CoDPON/RT_PRT_RIV.wkt
+MapBasedMovement.mapFile12 = data/CoDPON/RT_SRE_RIV.wkt
+MapBasedMovement.mapFile13 = data/CoDPON/RT_SST_RIV.wkt
+MapBasedMovement.mapFile14 = data/CoDPON/originboat.wkt
+
+MapBasedMovement.mapFile15 = data/CoDPON/RT_New1_MNA_SST.wkt
+MapBasedMovement.mapFile16 = data/CoDPON/RT_New2_BLM_PRT.wkt
+MapBasedMovement.mapFile17 = data/CoDPON/RT_New3_BRV_PPD.wkt
+MapBasedMovement.mapFile18 = data/CoDPON/RT_New4_MNA_BLM.wkt
+MapBasedMovement.mapFile19 = data/CoDPON/RT_New5_PPD_SRE.wkt
+
+
+
+## Message creation parameters 
+# How many event generators
+Events.nrof = 9
+# Class of the first event generator
+Events1.class = MessageEventGenerator
+# (following settings are specific for the MessageEventGenerator class)
+# Creation interval in seconds (one new message every 25 to 35 seconds) 864s/packet
+Events1.interval = 864
+# Message sizes (50kB - 150kB) small size: 576Bytes  boat-to-boat limitation: 75KB
+Events1.size = 75k
+# range of message source/destination addresses
+# Existem 8 PBS, por isso o 8
+Events1.hosts = 13, 21
+# Message ID prefix
+Events1.prefix = M
+
+
+## Movement model settings
+# seed for movement models' pseudo random number generator (default = 0)
+MovementModel.rngSeed = 1
+# World's size for Movement Models without implicit size (width, height; meters)
+MovementModel.worldSize = 20000, 20000
+# How long time to move hosts in the world before real simulation
+MovementModel.warmup = 1
+
+# how many reports to load
+Report.nrofReports = 1
+# length of the warm up period (simulated seconds)
+Report.warmup = 0
+# default directory of reports (can be overridden per Report with output setting)
+Report.reportDir = reports/
+# Report classes to load
+Report.report1 = MessageDelayReport
+
+## Optimization settings -- these affect the speed of the simulation
+## see World class for details.
+Optimization.connectionAlg = 2
+Optimization.cellSizeMult = 5
+Optimization.randomizeUpdateOrder = true
+
+
+## GUI settings
+
+# GUI underlay image settings
+GUI.UnderlayImage.fileName = data/CoDPON/Marajo.png
+# Image offset in pixels (x, y)
+GUI.UnderlayImage.offset = -360, 5
+# Scaling factor for the image
+GUI.UnderlayImage.scale = 10.40
+# Image rotation (radians)
+GUI.UnderlayImage.rotate = -0.015
+
+# how many events to show in the log panel (default = 30)
+GUI.EventLogPanel.nrofEvents = 30
+# Regular Expression log filter (see Pattern-class from the Java API for RE-matching details)
+#GUI.EventLogPanel.REfilter = .*p[1-9]<->p[1-9]$
